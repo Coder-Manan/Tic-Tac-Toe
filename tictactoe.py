@@ -1,460 +1,182 @@
 import tkinter as tk
+from tkinter.ttk import *
 from tkinter import messagebox
-import sys
-root=tk.Tk()
-root.geometry()
-root.title('Tic-Tac-Toe')
-n=c11=c12=c13=c21=c22=c23=c31=c32=c33=g=xwin=owin=win=0
-def click11():
-    global n,c11,xwin,owin,xp,op,win
-    if int(c11)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=0,column=0)
-           c11='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=0,column=0)
-           c11='o'
-       n+=1
-    if c11==c12==c13!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()       
-    if c11==c22==c33!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
+def play():
+    global n,g,r,lc,lr,win,regi,root
+    root=tk.Tk()
+    root.title('Tic-Tac-Toe')
+    n=g=r=0
+    imgf=tk.PhotoImage(file="bg.png")
+    tbg=tk.Label(root,image=imgf,bd=-7)
+    tbg.image=imgf
+    tbg.grid(row=0,column=0,rowspan=6,columnspan=5)
+    lc=[['','',''],['','',''],['','','']]
+    lr=[[1,2,3],[1,2,3],[1,2,3]]
+    win={'x':[0,'X'],'o':[0,'O']}
+    def namcha():
+        global win,r,g,root,regi
+        messagebox.showinfo('Alert','Current game will be lost')
+        g-=1
+        r=0
+        win['x'][1],win['o'][1]='X','O'
         nextgame()
-    if c11==c21==c31!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-def click12():
-    global n,c12,owin,xwin,op,xp  
-    if int(c12)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=0,column=1)
-           c12='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=0,column=1)
-           c12='o' 
-    n+=1
-    if c11==c12==c13!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()    
-    elif c22==c12==c32!=0:
-        if c12=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c12=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-def click13():
-    global n,c13,owin,xwin,op,xp
-    if int(c13)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=0,column=2)
-           c13='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=0,column=2)
-           c13='o' 
-       n+=1
-    if c11==c12==c13!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()    
-    elif c13==c22==c31!=0:
-        if c13=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame() 
-    if c23==c33==c13!=0:
-        if c13=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c13=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-def click21():
-    global n,c21,owin,xwin
-    if int(c21)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=1,column=0)
-           c21='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=1,column=0)
-           c21='o' 
-       n+=1    
-    if c21==c22==c23!=0:
-        if c21=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c21=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c11==c21==c31!=0:
-        if c21=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c21=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-def click22():
-    global n,c22,owin,xwin
-    if int(c22)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=1,column=1)
-           c22='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=1,column=1)
-           c22='o' 
-       n+=1    
-    if c21==c22==c23!=0:
-        if c21=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c21=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c11==c22==c33!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c13==c22==c31!=0:
-        if c13=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c13=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame() 
-    if c32==c12==c22!=0:
-        if c21=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c21=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-def click23():
-    global n,c23,owin,xwin
-    if int(c23)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=1,column=2)
-           c23='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=1,column=2)
-           c23='o' 
-       n+=1    
-    if c21==c22==c23!=0:
-        if c21=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c21=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()  
-    if c13==c33==c23!=0:
-        if c21=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c21=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-def click31():
-    global n,c31,owin,xwin
-    if int(c31)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=2,column=0)
-           c31='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=2,column=0)
-           c31='o' 
-       n+=1
-    
-    if c11==c21==c31!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()    
-    if c31==c32==c33!=0:
-        if c31=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c31=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c13==c22==c31!=0:
-        if c31=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c31=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
+        regi.grid_forget()
+        regi=tk.Button(root,text='Register \nNames',command=sta)
+        regi.grid(row=2,column=3,columnspan=2)
+        regi.config(height=3,width=11)
+    def click(r,c):                                                 
+        global n,win,lc,lr
+        wd=0                                                        
+        if lr[r-1][c-1]==c:                                        
+            if n%2==0:
+               bt=tk.Label(root,text='X',width=4,height=2,font=15)
+               bt.grid(row=r-1,column=c-1)
+               lc[r-1][c-1]='x'
+            elif n%2==1:
+               bt=tk.Label(root,text='O',width=4,height=2,font=15)
+               bt.grid(row=r-1,column=c-1)
+               lc[r-1][c-1]='o'
+            n+=1
+            lr[r-1][c-1]=None
+            
+            #checking for win
+            if lc[r-1][0]==lc[r-1][1]==lc[r-1][2]!='':
+                win[lc[r-1][0]][0]+=1
+                messagebox.showinfo('Hurray',(win[lc[r-1][0]][1]+' has won'))
+                wd=1
+                nextgame()
+            elif lc[0][c-1]==lc[1][c-1]==lc[2][c-1]!='':
+                messagebox.showinfo('Hurray',(win[lc[0][c-1]][1]+' has won'))
+                win[lc[0][c-1]][0]+=1
+                wd=1
+                nextgame()
+            elif lc[0][0]==lc[1][1]==lc[2][2]!='':
+                messagebox.showinfo('Hurray',(win[lc[0][0]][1]+' has won'))
+                win[lc[0][0]][0]+=1
+                nextgame()
+            elif lc[0][2]==lc[1][1]==lc[2][0]!='':
+                messagebox.showinfo('Hurray',(win[lc[1][1]][1]+' has won'))
+                win[lc[1][1]][0]+=1
+                nextgame()
+            if n==9:
+                messagebox.showinfo('Next Time',"It's a draw!")
+                nextgame()
 
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-    
-def click32():
-    global n,c32,owin,xwin
-    if int(c32)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=2,column=1)
-           c32='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=2,column=1)
-           c32='o' 
-       n+=1    
-    if c31==c32==c33!=0:
-        if c31=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c31=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c12==c22==c32!=0:
-        if c32=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c32=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')        
-        nextgame()  
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
+    def nextgame():
+        global n,win,lc,lr,name1,name2,r,g
+        lc=[['','',''],['','',''],['','','']]
+        lr=[[1,2,3],[1,2,3],[1,2,3]]
+        wd=0 
+        g=g+1
+        n=0
+        label=tk.Label(root,text='Game No.='+str(g)+'\nGames Won:\n'+str(win['x'][1])+':'+str(win['x'][0])+'\n'+str(win['o'][1])+':'+str(win['o'][0]))
+        label.grid(row=3,column=0,rowspan=3,columnspan=3)
+        bt=tk.Button(root,text=' ',command=lambda:click(1,1),width=7,height=3)
+        bt.grid(row=0,column=0,sticky='se')
 
-def click33():
-    global n,c33,owin,xwin
-    if int(c33)==0:
-       if n%2==0:
-           bt=tk.Label(root,text='X',width=4,height=2,font=15)
-           bt.grid(row=2,column=2)
-           c33='x'
-       elif n%2==1:
-           bt=tk.Label(root,text='O',width=4,height=2,font=15)
-           bt.grid(row=2,column=2)
-           c33='o'
-       n+=1
-    if c31==c32==c33!=0:
-        if c31=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c31=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c11==c22==c33!=0:
-        if c11=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c11=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')
-        nextgame()
-    if c13==c23==c33!=0:
-        if c13=='x':
-            xwin+=1
-            messagebox.showinfo('Hurray',str(xp)+' has won the game')
-        elif c13=='o':
-            owin+=1
-            messagebox.showinfo('Hurray',str(op)+' has won the game')        
-        nextgame()
-    print(n)  
-    if n==9:
-        messagebox.showinfo('NExt Time',"It's a Draw")
-        nextgame()
-xp=tk.StringVar()
-op=tk.StringVar()
+        bt=tk.Button(root,text=' ',command=lambda:click(1,2),width=7,height=3)
+        bt.grid(row=0,column=1,sticky='sew')
 
-    
-def nextgame():
-    global n,c11,c12,c13,c21,c22,c23,c31,c32,c33,g,xwin,owin
-    g+=1
-    n=c11=c12=c13=c21=c22=c23=c31=c32=c33=0
-    bt=tk.Button(root,text=' ',command=click11,width=7,height=3)
-    bt.grid(row=0,column=0)
+        bt=tk.Button(root,text=' ',command=lambda:click(1,3),width=7,height=3)
+        bt.grid(row=0,column=2,sticky='sw')
 
-    bt=tk.Button(root,text=' ',command=click12,width=7,height=3)
-    bt.grid(row=0,column=1)
+        bt=tk.Button(root,text=' ',command=lambda:click(2,1),width=7,height=3)
+        bt.grid(row=1,column=0,sticky='nse')
 
-    bt=tk.Button(root,text=' ',command=click13,width=7,height=3)
-    bt.grid(row=0,column=2)
+        bt=tk.Button(root,text=' ',command=lambda:click(2,2),width=7,height=3)
+        bt.grid(row=1,column=1,sticky='nsew')
 
-    bt=tk.Button(root,text=' ',command=click21,width=7,height=3)
-    bt.grid(row=1,column=0)
+        bt=tk.Button(root,text=' ',command=lambda:click(2,3),width=7,height=3)
+        bt.grid(row=1,column=2,sticky='nsw')
 
-    bt=tk.Button(root,text=' ',command=click22,width=7,height=3)
-    bt.grid(row=1,column=1)
+        bt=tk.Button(root,text=' ',command=lambda:click(3,1),width=7,height=3)
+        bt.grid(row=2,column=0,sticky='ne')
 
-    bt=tk.Button(root,text=' ',command=click23,width=7,height=3)
-    bt.grid(row=1,column=2)
+        bt=tk.Button(root,text=' ',command=lambda:click(3,2),width=7,height=3)
+        bt.grid(row=2,column=1,sticky='new')
 
-    bt=tk.Button(root,text=' ',command=click31,width=7,height=3)
-    bt.grid(row=2,column=0)
+        bt=tk.Button(root,text=' ',command=lambda:click(3,3),width=7,height=3)
+        bt.grid(row=2,column=2,sticky='nw')
+        if r==0:
+            name=tk.Label(root,text='Player \nwith X',width=5)
+            name.grid(row=0,column=3)
+            name1=tk.Entry(root,width=10)
+            name1.grid(row=0,column=4)
 
-    bt=tk.Button(root,text=' ',command=click32,width=7,height=3)
-    bt.grid(row=2,column=1)
+            name=tk.Label(root,text='Player \nwith O',width=5)
+            name.grid(row=1,column=3)
+            name2=tk.Entry(root,width=10)
+            name2.grid(row=1,column=4)
 
-    bt=tk.Button(root,text=' ',command=click33,width=7,height=3)
-    dr=int(g)-owin-xwin
-    bt.grid(row=2,column=2)
-    label=tk.Label(root,text='Game No.='+str(g+1)+'\nGames Won:\n'+str(xp)+':'+str(xwin)+'\n'+str(op)+':'+str(owin)+'\nGames Drawn:'+str(dr))
-    label.grid(row=3,column=0,rowspan=4,columnspan=3)
-       
-#seperation
+        nxtgame=tk.Button(root,text='Next Game\n(Mutual Draw)',width=10,height=2,command=nextgame)
+        nxtgame.grid(row=3,column=3,rowspan=2,columnspan=2,sticky='ns')
+        nxtgame.config(height=3,width=11)
+        sc=tk.Button(root,text='Interchange\nSigns',command=signchange)
+        sc.grid(row=5,column=3,rowspan=2,columnspan=2,sticky='n')
+        sc.config(height=3,width=11)
 
-bt=tk.Button(root,text=' ',command=click11,width=7,height=3)
-bt.grid(row=0,column=0)
+    def signchange():
+        global g,win
+        if win['x'][1]!='X' and win['o'][1]!='O':
+            win['x'],win['o']=win['o'],win['x']
+            g-=1
+            nextgame()
+        elif win['x'][1]!='X' and win['o'][1]=='O':
+            win['x'],win['o']=win['o'],win['x']
+            win['x'][1]='X'
+            g-=1
+            nextgame()
+        elif win['x'][1]=='X' and win['o'][1]!='O':
+            win['x'],win['o']=win['o'],win['x']
+            win['o'][1]='O'
+            g-=1
+            nextgame()
+        else:
+            win['x'],win['o']=win['o'],win['x']
+            win['o'][1]='O'
+            win['x'][1]='X'
+            g-=1
+            nextgame()
+        name1=tk.Label(root,text=win['x'][1])
+        name1.grid(row=0,column=4)
+        name2=tk.Label(root,text=win['o'][1])
+        name2.grid(row=1,column=4)  
 
-bt=tk.Button(root,text=' ',command=click12,width=7,height=3)
-bt.grid(row=0,column=1)
+    def sta():
+        global win,name1,name2,r,regi
+        if r==0:
+            name1.grid_forget()
+            name2.grid_forget()
+            if name1.get()=='' or name2.get()=='':
+                if win['x'][1]=='' and win['o'][1]!='':
+                    win['o'][1]=name2.get()
+                if win['x'][1]!='' and win['o'][1]=='':
+                    win['x'][1]=name1.get()
+            else:
+                win['x'][1]=name1.get()
+                win['o'][1]=name2.get()
+                
+            name1=tk.Label(root,text=win['x'][1])
+            name1.grid(row=0,column=4)
+            name2=tk.Label(root,text=win['o'][1])
+            name2.grid(row=1,column=4)
+            label=tk.Label(root,text='Game No.='+str(g)+'\nGames Won:\n'+str(win['x'][1])+':'+str(win['x'][0])+'\n'+str(win['o'][1])+':'+str(win['o'][0]))
+            label.grid(row=3,column=0,rowspan=3,columnspan=3)
 
-bt=tk.Button(root,text=' ',command=click13,width=7,height=3)
-bt.grid(row=0,column=2)
-
-bt=tk.Button(root,text=' ',command=click21,width=7,height=3)
-bt.grid(row=1,column=0)
-
-bt=tk.Button(root,text=' ',command=click22,width=7,height=3)
-bt.grid(row=1,column=1)
-
-bt=tk.Button(root,text=' ',command=click23,width=7,height=3)
-bt.grid(row=1,column=2)
-
-bt=tk.Button(root,text=' ',command=click31,width=7,height=3)
-bt.grid(row=2,column=0)
-
-bt=tk.Button(root,text=' ',command=click32,width=7,height=3)
-bt.grid(row=2,column=1)
-
-bt=tk.Button(root,text=' ',command=click33,width=7,height=3)
-bt.grid(row=2,column=2)
-
-name=tk.Label(root,text='Player \nwith X',width=5)
-name.grid(row=0,column=3)
-name1=tk.Entry(root,width=10)
-name1.grid(row=0,column=4)
-
-name=tk.Label(root,text='Player \nwith O',width=5)
-name.grid(row=1,column=3)
-name2=tk.Entry(root,width=10)
-name2.grid(row=1,column=4)
-
-nxtgame=tk.Button(root,text='Next Game\n(Mutual Draw)',width=10,height=2,command=nextgame)
-nxtgame.grid(row=3,column=3,rowspan=2,columnspan=2)
-
-def sta():
-    global op,xp,name1,name2
-    xp=name1.get()
-    op=name2.get()
-    name1.grid_forget()
-    name2.grid_forget()
-    name1=tk.Label(root,text=xp)
-    name1.grid(row=0,column=4)
-    name2=tk.Label(root,text=op)
-    name2.grid(row=1,column=4)
-    label=tk.Label(root,text='Game No.='+str(g+1)+'\nGames Won:\n'+str(xp)+':'+str(xwin)+'\n'+str(op)+':'+str(owin),anchor='w')
-    label.grid(row=3,column=0,rowspan=3,columnspan=3)
-    testing.grid_forget()
-    registered=tk.Button(root,text='Names\nRegistered')
-    registered.grid(row=2,column=3,columnspan=2)    
-
-testing=tk.Button(root,text='Register \nNames',command=sta)
-testing.grid(row=2,column=3,columnspan=2)
-root.mainloop()
-
-
-"""
-def complay_x():
-    global n
-    if n%2==0:
-        fnlist=[]
-        for i in [clickc11,clickc12,clickc13,clickc21,clickc22,clickc23,clickc31,clickc32,clickc33]:
-            if int(i)==0:
-                fnlist.append(i)
-            random.choice(fnlist)()
-def complay_o():
-    global n
-    if n%2==1:
-        fnlist=[]
-        for i in [clickc11,clickc12,clickc13,clickc21,clickc22,clickc23,clickc31,clickc32,clickc33]:
-            if int(i)==0:
-                fnlist.append(i)
-            random.choice(fnlist)()        
-        
-    
-"""
+            regi.grid_forget()
+            registered=tk.Button(root,text='Change Names',command=namcha)
+            registered.grid(row=2,column=3,columnspan=2)
+            r=1
+        else:
+            name1=tk.Label(root,text=win['x'][1])
+            name1.grid(row=0,column=4)
+            name2=tk.Label(root,text=win['o'][1])
+            name2.grid(row=1,column=4)
+            label=tk.Label(root,text='Game No.='+str(g)+'\nGames Won:\n'+str(win['x'][1])+':'+str(win['x'][0])+'\n'+str(win['o'][1])+':'+str(win['o'][0]))
+            label.grid(row=3,column=0,rowspan=3,columnspan=3)
+    regi=tk.Button(root,text='Register \nNames',command=sta)
+    regi.grid(row=2,column=3,columnspan=2,sticky='s')
+    regi.config(height=3,width=11)
+    nextgame()
+    root.mainloop()
+play()
